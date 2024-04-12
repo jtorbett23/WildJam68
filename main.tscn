@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtpicdsctid27"]
+[gd_scene load_steps=4 format=3 uid="uid://dtpicdsctid27"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8dwot"]
+[ext_resource type="Script" path="res://draw.gd" id="2_5m5p5"]
 [ext_resource type="Texture2D" uid="uid://d3uaujdpyb80" path="res://assets/art/horse.png" id="2_wuuug"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8dwot")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(560, 320)
+[node name="Draw" type="Node2D" parent="."]
+script = ExtResource("2_5m5p5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Draw"]
+visible = false
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_wuuug")
