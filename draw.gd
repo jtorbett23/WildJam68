@@ -3,7 +3,7 @@ extends Node2D
 var color = Color.BLACK	
 var radius = 20
 
-var draw_data :Array = []
+var draw_data : Array = []
 var min_pos : Vector2
 var max_pos : Vector2
 
@@ -39,5 +39,7 @@ func _process(delta):
 		draw_data.append(pos)
 	elif Input.is_action_just_pressed("clear"):
 		draw_data = []
+	elif Input.is_action_pressed("undo"):
+		draw_data.pop_back()
 	queue_redraw()
 	pass
