@@ -8,10 +8,11 @@ var previous_draw : Array = [[]]
 var min_pos : Vector2
 var max_pos : Vector2
 
-@onready var colours : Node2D = $Colours
+@onready var colours : Node2D = $"../../../Colours"
+@onready var sizes : Node2D = $"../../../Sizes"
 
 
-@onready var sizes : Node2D = $Sizes
+@onready var subviewport : SubViewport = $"../."
 
 func _draw():
 	for data in draw_data:
@@ -26,6 +27,7 @@ func _ready():
 		child.connect("pressed", change_size.bind(child.name))
 
 	var background : Sprite2D = $"Background"
+	subviewport.size = background.get_rect().size * background.transform.get_scale()
 	var background_size = background.get_rect().size * background.transform.get_scale()
 	min_pos = background.global_position
 	max_pos = min_pos + background_size
@@ -79,5 +81,16 @@ func _process(delta):
 			previous_draw = [[]]
 		#undo v1
 		# draw_data.pop_back()
-			
+	if Input.is_action_just_pressed("screenshot"):
+		print("click wow")
+		take_pic("Canvas")	
 	queue_redraw()
+
+
+func take_pic(filename=""):
+	var capture = subviewport.get_texture().get_image()
+	var _time = Time.get_datetime_string_from_system()
+
+	var filepath = "./assets/user-art/{1}-Screenshot-{0}.png".format({"0": _time, "1":filename})
+	capture.save_png(filepath)
+	# subviewport.size = original_size

@@ -14,6 +14,6 @@ func take_pic(filename=""):
 	capture.save_png(filepath)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if Input.is_action_just_pressed("screenshot"):
-		take_pic("Input")
+# func _process(_delta):
+# 	if Input.is_action_just_pressed("screenshot"):
+# 		take_pic("Input")
