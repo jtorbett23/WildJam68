@@ -13,6 +13,7 @@ var max_pos : Vector2
 
 
 @onready var subviewport : SubViewport = $"../."
+@onready var subviewport_container : SubViewportContainer = $"../../."
 
 func _draw():
 	for data in draw_data:
@@ -27,7 +28,7 @@ func _ready():
 		child.connect("pressed", change_size.bind(child.name))
 
 	var background : Sprite2D = $"Background"
-	subviewport.size = background.get_rect().size * background.transform.get_scale()
+	subviewport_container.size = background.get_rect().size * background.transform.get_scale()
 	var background_size = background.get_rect().size * background.transform.get_scale()
 	min_pos = background.global_position
 	max_pos = min_pos + background_size
