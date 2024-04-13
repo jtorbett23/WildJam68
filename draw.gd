@@ -10,6 +10,9 @@ var max_pos : Vector2
 
 @onready var colours : Node2D = $Colours
 
+
+@onready var sizes : Node2D = $Sizes
+
 func _draw():
 	for data in draw_data:
 		draw_circle(data.pos, data.radius, data.colour)
@@ -18,6 +21,9 @@ func _draw():
 func _ready():
 	for child : Button in colours.get_children():
 		child.connect("pressed", change_colour.bind(child.name))
+	
+	for child : Button in sizes.get_children():
+		child.connect("pressed", change_size.bind(child.name))
 
 	var background : Sprite2D = $"Background"
 	var background_size = background.get_rect().size * background.transform.get_scale()
@@ -34,6 +40,14 @@ func change_colour(_colour_name):
 		colour = Color.PINK
 	elif _colour_name == "Blue":
 		colour = Color.BLUE
+
+func change_size(_radius_size):
+	if _radius_size == "Small":
+		radius = 10
+	elif _radius_size == "Medium":
+		radius = 20
+	elif _radius_size == "Big":
+		radius = 40
 
 func is_on_canvas(mouse_pos) -> bool:
 	#within min

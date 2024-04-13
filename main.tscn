@@ -46,3 +46,28 @@ offset_top = 160.0
 offset_right = 1009.0
 offset_bottom = 191.0
 text = "Blue"
+
+[node name="Sizes" type="Node2D" parent="Draw"]
+position = Vector2(3, 213)
+
+[node name="Small" type="Button" parent="Draw/Sizes"]
+offset_left = 953.0
+offset_top = 110.0
+offset_right = 1009.0
+offset_bottom = 141.0
+text = "Small
+"
+
+[node name="Medium" type="Button" parent="Draw/Sizes"]
+offset_left = 953.0
+offset_top = 160.0
+offset_right = 1025.0
+offset_bottom = 191.0
+text = "Medium"
+
+[node name="Big" type="Button" parent="Draw/Sizes"]
+offset_left = 955.0
+offset_top = 209.0
+offset_right = 1011.0
+offset_bottom = 240.0
+text = "Big"
