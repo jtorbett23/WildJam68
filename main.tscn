@@ -23,3 +23,26 @@ position = Vector2(202, 99)
 scale = Vector2(1.92222, 1.85148)
 texture = ExtResource("2_wuuug")
 centered = false
+
+[node name="Colours" type="Node2D" parent="Draw"]
+
+[node name="Pink" type="Button" parent="Draw/Colours"]
+offset_left = 953.0
+offset_top = 110.0
+offset_right = 1009.0
+offset_bottom = 141.0
+text = "Pink"
+
+[node name="Black" type="Button" parent="Draw/Colours"]
+offset_left = 955.0
+offset_top = 209.0
+offset_right = 1011.0
+offset_bottom = 240.0
+text = "Black"
+
+[node name="Blue" type="Button" parent="Draw/Colours"]
+offset_left = 953.0
+offset_top = 160.0
+offset_right = 1009.0
+offset_bottom = 191.0
+text = "Blue"

@@ -1,6 +1,6 @@
 extends Node2D
 
-var color = Color.BLACK	
+var colour = Color.BLACK	
 var radius = 20
 
 var draw_data : Array = []
@@ -8,13 +8,16 @@ var previous_draw : Array = [[]]
 var min_pos : Vector2
 var max_pos : Vector2
 
+@onready var colours : Node2D = $Colours
+
 func _draw():
 	for data in draw_data:
-		draw_circle(data.pos, data.radius, color)
+		draw_circle(data.pos, data.radius, data.colour)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
+	for child : Button in colours.get_children():
+		child.connect("pressed", change_colour.bind(child.name))
 
 	var background : Sprite2D = $"Background"
 	var background_size = background.get_rect().size * background.transform.get_scale()
@@ -24,6 +27,13 @@ func _ready():
 
 	pass # Replace with function body.
 
+func change_colour(_colour_name):
+	if _colour_name == "Black":
+		colour = Color.BLACK
+	elif _colour_name == "Pink":
+		colour = Color.PINK
+	elif _colour_name == "Blue":
+		colour = Color.BLUE
 
 func is_on_canvas(mouse_pos) -> bool:
 	#within min
@@ -37,8 +47,9 @@ func is_on_canvas(mouse_pos) -> bool:
 func _process(delta):
 	var pos = get_global_mouse_position()
 	if Input.is_action_pressed("draw") and is_on_canvas(pos):
-		if(draw_data.find({"pos":pos, "radius": radius}) == -1):
-			draw_data.append({"pos":pos, "radius": radius})
+		var draw_event = {"pos":pos, "radius": radius, "colour": colour}
+		if(draw_data.find(draw_event) == -1):
+			draw_data.append(draw_event)
 			#undo v2
 			previous_draw.append(draw_data.duplicate())
 	elif Input.is_action_just_pressed("clear"):
