@@ -21,6 +21,7 @@ func _draw():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	AudioManager.play_music("drawing.mp3")
 	for child : Button in colours.get_children():
 		child.connect("pressed", change_colour.bind(child.name))
 	

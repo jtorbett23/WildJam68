@@ -12,8 +12,3 @@ func take_pic(filename=""):
 
 	var filepath = "./assets/user-art/{1}-Screenshot-{0}.png".format({"0": _time, "1":filename})
 	capture.save_png(filepath)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(_delta):
-# 	if Input.is_action_just_pressed("screenshot"):
-# 		take_pic("Input")
