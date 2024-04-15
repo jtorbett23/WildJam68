@@ -90,7 +90,7 @@ func _process(delta):
 
 
 func take_pic(filename=""):
-	var capture = subviewport.get_texture().get_image()
+	var capture : Image = subviewport.get_texture().get_image()
 	var _time = Time.get_datetime_string_from_system()
 
 	var filepath = "./assets/user-art/{1}-Screenshot-{0}.png".format({"0": _time, "1":filename})
