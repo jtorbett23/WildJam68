@@ -14,6 +14,9 @@ var max_pos : Vector2
 
 @onready var subviewport : SubViewport = $"../."
 @onready var subviewport_container : SubViewportContainer = $"../../."
+@onready var background : Sprite2D = $"Background"
+# @onready var ref_background : Sprite2D =  $"../../../RefBackground"
+@onready var reference : Sprite2D = $"../../../Reference"
 
 func _draw():
 	for data in draw_data:
@@ -28,13 +31,22 @@ func _ready():
 	for child : Button in sizes.get_children():
 		child.connect("pressed", change_size.bind(child.name))
 
-	var background : Sprite2D = $"Background"
+	var bg_img_size = background.texture.get_image().get_size()
+	var ref_img_size = reference.texture.get_image().get_size()
+	print(ref_img_size, bg_img_size)
+	var scale_x : float = float(ref_img_size.x) / float(bg_img_size.x)
+	var scale_y : float = float(ref_img_size.y) / float(bg_img_size.y)
+
+	print(scale_x, scale_y)
+	background.scale = Vector2(scale_x, scale_y)
+	# ref_background.scale = Vector2(scale_x, scale_y)
 	subviewport_container.size = background.get_rect().size * background.transform.get_scale()
 	var background_size = background.get_rect().size * background.transform.get_scale()
 	min_pos = background.global_position
 	max_pos = min_pos + background_size
-	print(min_pos, max_pos)
-
+	# print(min_pos, max_pos)
+	# await RenderingServer.frame_post_draw
+	# ref_img = subviewport.get_texture().get_image()
 	pass # Replace with function body.
 
 func change_colour(_colour_name):
@@ -85,14 +97,41 @@ func _process(delta):
 		# draw_data.pop_back()
 	if Input.is_action_just_pressed("screenshot"):
 		print("click wow")
-		take_pic("Canvas")	
+		take_pic("Canvas")
+	if Input.is_action_just_pressed("compare"):
+		compare_with_reference()	
 	queue_redraw()
 
 
 func take_pic(filename=""):
+	# background.visible = false
+	# await RenderingServer.frame_post_draw
 	var capture : Image = subviewport.get_texture().get_image()
+	# background.visible = true
 	var _time = Time.get_datetime_string_from_system()
-
 	var filepath = "./assets/user-art/{1}-Screenshot-{0}.png".format({"0": _time, "1":filename})
+
 	capture.save_png(filepath)
 	# subviewport.size = original_size
+
+func compare_with_reference():
+	var ref_img : Image = reference.texture.get_image()
+	# background.visible = false
+	# await RenderingServer.frame_post_draw
+	# 15 seems an ok value for peak_snr with luma / 10 without
+	var drawing : Image = subviewport.get_texture().get_image()
+	# background.visible = true
+	# print(ref_img.get_size(), drawing.get_size())
+	compare_images(ref_img, drawing)
+	# ref_img.save_png("./test1.png")
+	# drawing.save_png("./test2.png")
+
+	
+
+
+func compare_images(image1, image2):
+	print("Image 1 with 2")
+	print(image1.compute_image_metrics(image2, false))
+	print("Image 1 with 2: with luma")
+	print(image1.compute_image_metrics(image2, true))
+
