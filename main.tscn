@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtpicdsctid27"]
+[gd_scene load_steps=4 format=3 uid="uid://dtpicdsctid27"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8dwot"]
 [ext_resource type="Script" path="res://menu/mainMenu.gd" id="2_cm4hs"]
 [ext_resource type="Theme" uid="uid://cxdwqrbplea6g" path="res://theme/title.tres" id="3_dglsi"]
-[ext_resource type="Script" path="res://menu/settingsMenu.gd" id="4_kvn3l"]
-
-[sub_resource type="Theme" id="Theme_by2se"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8dwot")
@@ -65,108 +62,3 @@ text = "Start Game"
 [node name="Settings" type="Button" parent="MainMenu/Buttons"]
 layout_mode = 2
 text = "Settings"
-
-[node name="SettingsMenu" type="Control" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_by2se")
-script = ExtResource("4_kvn3l")
-
-[node name="Background" type="ColorRect" parent="MainMenu/SettingsMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.141176, 0.141176, 0.141176, 1)
-
-[node name="Label" type="Label" parent="MainMenu/SettingsMenu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -77.0
-offset_top = 100.0
-offset_right = 77.0
-offset_bottom = 155.0
-grow_horizontal = 2
-theme = ExtResource("3_dglsi")
-text = "Settings"
-
-[node name="Options" type="VBoxContainer" parent="MainMenu/SettingsMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -76.5
-offset_right = 75.0
-offset_bottom = 76.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Sound" type="HBoxContainer" parent="MainMenu/SettingsMenu/Options"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Name" type="Label" parent="MainMenu/SettingsMenu/Options/Sound"]
-layout_mode = 2
-text = "Sound: 
-"
-
-[node name="Sound -" type="Button" parent="MainMenu/SettingsMenu/Options/Sound"]
-layout_mode = 2
-text = "-
-"
-
-[node name="Level" type="Label" parent="MainMenu/SettingsMenu/Options/Sound"]
-layout_mode = 2
-text = "100
-"
-
-[node name="Sound +" type="Button" parent="MainMenu/SettingsMenu/Options/Sound"]
-layout_mode = 2
-text = "+
-"
-
-[node name="Music" type="HBoxContainer" parent="MainMenu/SettingsMenu/Options"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Name" type="Label" parent="MainMenu/SettingsMenu/Options/Music"]
-layout_mode = 2
-text = "Music:
-"
-
-[node name="Music -" type="Button" parent="MainMenu/SettingsMenu/Options/Music"]
-layout_mode = 2
-text = "-
-"
-
-[node name="Level" type="Label" parent="MainMenu/SettingsMenu/Options/Music"]
-layout_mode = 2
-text = "100
-"
-
-[node name="Music +" type="Button" parent="MainMenu/SettingsMenu/Options/Music"]
-layout_mode = 2
-text = "+
-"
-
-[node name="Return" type="Button" parent="MainMenu/SettingsMenu/Options"]
-layout_mode = 2
-text = "Return"

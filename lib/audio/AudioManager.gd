@@ -12,6 +12,9 @@ var queue = []  # The queue of sounds to play.
 var music_player : AudioStreamPlayer
 var audio_path : String = "assets/audio"
 
+var music_level : float
+var sound_level : float
+
 func _ready():
 	# Create the pool of AudioStreamPlayer nodes.
 	for i in num_players:
@@ -26,7 +29,11 @@ func _ready():
 	music_player.name = "Music Player"
 	music_player.finished.connect(_on_music_finished.bind(music_player))
 	add_child(music_player)
-	
+
+	sound_level = GameData.get_value("sound_level")
+	music_level = GameData.get_value("music_level")
+	change_sound_volume(sound_level)
+	change_music_volume(music_level)
 
 func _on_music_finished(stream):
 	# When finished playing a music track, play it again.
@@ -44,13 +51,13 @@ func play_music(music_name):
 	music_player.stream = load(audio_path + "/music/" + music_name)
 	music_player.play()
 
-#TODO
-func change_music_volume():
-	pass
 
-#TODO
-func change_sound_volume():
-	pass
+func change_music_volume(level):
+	music_player.volume_db = linear_to_db(level/100)
+
+func change_sound_volume(level):
+	for player in sound_players:
+		player.volume_db = linear_to_db(level/100)
 
 func _process(_delta):
 	# Play a queued sound if any players are available.

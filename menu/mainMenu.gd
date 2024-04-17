@@ -1,7 +1,8 @@
 extends Control
 
 @onready var buttons = $Buttons
-@onready var settings = $SettingsMenu
+# @onready var settings = $SettingsMenu
+var settingsMenu = preload("res://menu/settingsMenu.tscn")
 
 func _ready():
 	AudioManager.play_music("menu.mp3")
@@ -11,7 +12,5 @@ func _ready():
 func handle_button(button_name):
 	if(button_name == "Start"):
 		print("Start")
-		pass
 	elif(button_name == "Settings"):
-		settings.visible = true
-		pass
+		add_child(settingsMenu.instantiate())
