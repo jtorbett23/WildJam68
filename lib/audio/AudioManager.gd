@@ -43,6 +43,8 @@ func _on_sound_finished(stream):
 	# When finished playing a stream, make the player available again.
 	available.append(stream)
 
+func stop_music():
+	music_player.stop()
 
 func play_sound(sound_name):
 	queue.append(audio_path + "/sound/" + sound_name)
@@ -50,7 +52,6 @@ func play_sound(sound_name):
 func play_music(music_name):
 	music_player.stream = load(audio_path + "/music/" + music_name)
 	music_player.play()
-
 
 func change_music_volume(level):
 	var music_bus = AudioServer.get_bus_index("Music")

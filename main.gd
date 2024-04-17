@@ -10,7 +10,12 @@ func _ready():
 	main_menu = main_menu_ref.instantiate()
 	main_menu.connect("start_game", start_game)
 	add_child(main_menu)
+	Camera.transition.connect("faded_in", switch_scene)
 
 func start_game():
-	main_menu.queue_free()
-	add_child(travel_ref.instantiate())
+	Camera.transition.fade("Travel")
+
+func switch_scene(target):
+	if(target == "Travel"):
+		main_menu.queue_free()
+		add_child(travel_ref.instantiate())

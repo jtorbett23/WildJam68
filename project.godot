@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 AudioManager="*res://lib/audio/AudioManager.gd"
 GameData="*res://gameData.gd"
+Camera="*res://camera.gd"
 
 [display]
 
