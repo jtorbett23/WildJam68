@@ -3,7 +3,6 @@ extends Node
 class_name Audio
 
 var num_players = 8
-var bus = "master"
 
 var sound_players = [] # Reference of all sound players
 var available = []  # The available sound players.
@@ -24,9 +23,10 @@ func _ready():
 		available.append(p)
 		sound_players.append(p)
 		p.finished.connect(_on_sound_finished.bind(p))
-		p.bus = bus
+		p.bus = "Sound"
 	music_player = AudioStreamPlayer.new()
 	music_player.name = "Music Player"
+	music_player.bus = "Music"
 	music_player.finished.connect(_on_music_finished.bind(music_player))
 	add_child(music_player)
 
@@ -53,11 +53,12 @@ func play_music(music_name):
 
 
 func change_music_volume(level):
-	music_player.volume_db = linear_to_db(level/100)
+	var music_bus = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_volume_db(music_bus, linear_to_db(level/100))
 
 func change_sound_volume(level):
-	for player in sound_players:
-		player.volume_db = linear_to_db(level/100)
+	var sound_bus = AudioServer.get_bus_index("Sound")
+	AudioServer.set_bus_volume_db(sound_bus, linear_to_db(level/100))
 
 func _process(_delta):
 	# Play a queued sound if any players are available.
