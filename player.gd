@@ -2,27 +2,20 @@ extends CharacterBody2D
 
 @export var speed : int = 400
 
-@onready var area : Area2D = $"../Area2D"
-
 var interactable = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	area.connect("body_entered", on_area_entered)
-	area.connect("body_exited", on_area_exited)
-	pass # Replace with function body.
-
-func on_area_entered(_event):
-	print("yo")
-	interactable = true
-
-func on_area_exited(_event):
-	print("no")
-	interactable = false
+	pass
 
 func _input(event):
 	if event.is_action_pressed("interact"):
 		if(interactable):
+			if(interactable.name == "Door"):
+				position.x += 300
+			elif(interactable.name == "Door2"):
+				position.x -= 300
+
 			print("interact")
 
 
