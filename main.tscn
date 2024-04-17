@@ -1,64 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtpicdsctid27"]
+[gd_scene load_steps=2 format=3 uid="uid://dtpicdsctid27"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8dwot"]
-[ext_resource type="Script" path="res://menu/mainMenu.gd" id="2_cm4hs"]
-[ext_resource type="Theme" uid="uid://cxdwqrbplea6g" path="res://theme/title.tres" id="3_dglsi"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8dwot")
-
-[node name="MainMenu" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_cm4hs")
-
-[node name="Background" type="ColorRect" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.141176, 0.141176, 0.141176, 1)
-
-[node name="Title" type="Label" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -155.0
-offset_top = 100.0
-offset_right = 155.0
-offset_bottom = 155.0
-grow_horizontal = 2
-theme = ExtResource("3_dglsi")
-text = "Phantom Forger"
-
-[node name="Buttons" type="VBoxContainer" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -85.0
-offset_top = -46.0
-offset_right = 85.0
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Start" type="Button" parent="MainMenu/Buttons"]
-layout_mode = 2
-text = "Start Game"
-
-[node name="Settings" type="Button" parent="MainMenu/Buttons"]
-layout_mode = 2
-text = "Settings"

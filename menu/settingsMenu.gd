@@ -22,7 +22,7 @@ func find_buttons(parent):
 
 func handle_button(button_name):
 	if(button_name == "Return"):
-		queue_free()
+		self.queue_free()
 	elif(button_name == "Sound +"):
 		if(float(sound_level_label.text) <= 95):
 			change_volume("Sound", 5)

@@ -1,8 +1,8 @@
 extends Node
 
 var settings : Dictionary = {
-	"music_level": 100,
-	"sound_level": 100
+	"music_level": 50,
+	"sound_level": 50
 }
 
 func set_value(key, value) -> void:

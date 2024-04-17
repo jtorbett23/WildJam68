@@ -5,6 +5,7 @@ extends Node2D
 @onready var player = $Player
 
 func _ready():
+	AudioManager.play_music("daytime.mp3")
 	for child in interactables.get_children():
 		if(child.get_class() == "Area2D"):
 			child.connect("body_entered", on_area_entered.bind(child))
