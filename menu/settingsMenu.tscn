@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://tsptet5npo7c"]
+[gd_scene load_steps=3 format=3 uid="uid://tsptet5npo7c"]
 
 [ext_resource type="Script" path="res://menu/settingsMenu.gd" id="1_cjsgn"]
 [ext_resource type="Theme" uid="uid://cxdwqrbplea6g" path="res://theme/title.tres" id="2_254ts"]
-
-[sub_resource type="Theme" id="Theme_by2se"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -12,7 +10,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_by2se")
 script = ExtResource("1_cjsgn")
 
 [node name="Background" type="ColorRect" parent="."]

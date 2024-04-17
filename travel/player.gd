@@ -2,9 +2,12 @@ extends CharacterBody2D
 
 @export var speed : int = 400
 var interactable = false
+var settingsMenu = preload("res://menu/settingsMenu.tscn")
+
 
 func _input(event):
 	if event.is_action_pressed("interact"):
+		# $CanvasLayer.add_child(settingsMenu.instantiate())
 		if(interactable):
 			if(interactable.name == "Door"):
 				position.x += 300
