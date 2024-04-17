@@ -13,11 +13,17 @@ config_version=5
 config/name="WildJam68"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
 
 [autoload]
 
 AudioManager="*res://lib/audio/AudioManager.gd"
+GameSettings="*res://gameSettings.gd"
+
+[display]
+
+window/size/resizable=false
 
 [input]
 

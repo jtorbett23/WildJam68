@@ -1,6 +1,6 @@
-extends Node2D
+extends Node
 
-var draw_tool_ref = preload("res://draw_tool.tscn")
+var draw_tool_ref = preload("res://draw/draw_tool.tscn")
 var draw_tool 
 
 # Called when the node enters the scene tree for the first time.

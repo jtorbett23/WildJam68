@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://sx8tdyuorhh0"]
 
-[ext_resource type="Script" path="res://travel.gd" id="1_a7l70"]
+[ext_resource type="Script" path="res://travel/travel.gd" id="1_a7l70"]
 [ext_resource type="Texture2D" uid="uid://bsfnwfx16k1ha" path="res://assets/art/Fe6-01-map.png" id="1_fy0s0"]
-[ext_resource type="Script" path="res://player.gd" id="2_ra75s"]
+[ext_resource type="Script" path="res://travel/player.gd" id="2_ra75s"]
 [ext_resource type="Texture2D" uid="uid://dx3ba7lsr2hob" path="res://icon.svg" id="3_64xbf"]
 [ext_resource type="Texture2D" uid="uid://d3uaujdpyb80" path="res://assets/art/horse.png" id="4_q0onx"]
 
