@@ -16,6 +16,7 @@ func start_game():
 	Camera.transition.fade("Travel")
 
 func switch_scene(target):
-	if(target == "Travel"):
-		main_menu.queue_free()
-		add_child(travel_ref.instantiate())
+	if(typeof(target) == TYPE_STRING):
+		if(target == "Travel"):
+			main_menu.queue_free()
+			add_child(travel_ref.instantiate())
