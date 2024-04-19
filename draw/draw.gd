@@ -7,6 +7,7 @@ var draw_data : Array = []
 var previous_draw : Array = [[]]
 var min_pos : Vector2
 var max_pos : Vector2
+var canvas_size = Vector2(500,500)
 
 @onready var colours : Node2D = $"../../../Colours"
 @onready var sizes : Node2D = $"../../../Sizes"
@@ -36,9 +37,13 @@ func _ready():
 	print(ref_img_size, bg_img_size)
 	var scale_x : float = float(ref_img_size.x) / float(bg_img_size.x)
 	var scale_y : float = float(ref_img_size.y) / float(bg_img_size.y)
-
+	# var scale_x : float = float(canvas_size.x) / float(bg_img_size.x)
+	# var scale_y : float = float(canvas_size.y) / float(bg_img_size.y)
+	# var scale_ref_x : float = float(canvas_size.x) / float(ref_img_size.x)
+	# var scale_ref_y : float = float(canvas_size.y) / float(ref_img_size.y)
 	print(scale_x, scale_y)
 	background.scale = Vector2(scale_x, scale_y)
+	# reference.scale = Vector2(scale_ref_x, scale_ref_y)
 	# ref_background.scale = Vector2(scale_x, scale_y)
 	subviewport_container.size = background.get_rect().size * background.transform.get_scale()
 	var background_size = background.get_rect().size * background.transform.get_scale()

@@ -13,6 +13,7 @@ func _ready():
 
 func handle_button(button_name):
 	if(button_name == "Start"):
-		start_game.emit()
+		Camera.transition.fade("Travel")
+		queue_free()
 	elif(button_name == "Settings"):
 		add_child(settingsMenu.instantiate())

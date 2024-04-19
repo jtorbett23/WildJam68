@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgeefikyffu0l"]
+[gd_scene load_steps=5 format=3 uid="uid://cgeefikyffu0l"]
 
-[ext_resource type="Texture2D" uid="uid://xqbjuphtqn41" path="res://assets/user-art/Canvas-Screenshot-2024-04-16T00:42:23.png" id="1_ox6fa"]
+[ext_resource type="Script" path="res://draw/draw_tool.gd" id="1_kiyld"]
+[ext_resource type="Texture2D" uid="uid://c0usmyrdmj6bj" path="res://assets/art/painting-1-edited-export.png" id="1_vfmx3"]
 [ext_resource type="Script" path="res://draw/draw.gd" id="2_cgdce"]
 [ext_resource type="Texture2D" uid="uid://bv53wcmhac8xl" path="res://assets/art/canvas.png" id="3_x6u8v"]
 
 [node name="DrawTool" type="Node2D"]
+script = ExtResource("1_kiyld")
 
 [node name="Colours" type="Node2D" parent="."]
-position = Vector2(956, 146)
+position = Vector2(568, 24)
 
 [node name="Pink" type="Button" parent="Colours"]
 offset_top = 4.0
@@ -17,22 +19,23 @@ text = "Pink"
 metadata/_edit_use_anchors_ = true
 
 [node name="Black" type="Button" parent="Colours"]
-offset_left = 2.0
-offset_top = 103.0
-offset_right = 58.0
-offset_bottom = 134.0
+offset_left = 76.0
+offset_top = 7.0
+offset_right = 132.0
+offset_bottom = 38.0
 text = "Black"
 metadata/_edit_use_anchors_ = true
 
 [node name="Blue" type="Button" parent="Colours"]
-offset_top = 54.0
-offset_right = 56.0
-offset_bottom = 85.0
+offset_left = 160.0
+offset_top = 4.0
+offset_right = 216.0
+offset_bottom = 35.0
 text = "Blue"
 metadata/_edit_use_anchors_ = true
 
 [node name="Sizes" type="Node2D" parent="."]
-position = Vector2(956, 322)
+position = Vector2(206, 22)
 
 [node name="Small" type="Button" parent="Sizes"]
 offset_left = 2.0
@@ -43,35 +46,34 @@ text = "Small
 "
 
 [node name="Medium" type="Button" parent="Sizes"]
-offset_left = 2.0
-offset_top = 48.0
-offset_right = 74.0
-offset_bottom = 79.0
+offset_left = 90.0
+offset_right = 162.0
+offset_bottom = 31.0
 text = "Medium"
 
 [node name="Big" type="Button" parent="Sizes"]
-offset_left = 4.0
-offset_top = 97.0
-offset_right = 60.0
-offset_bottom = 128.0
+offset_left = 190.0
+offset_top = 1.0
+offset_right = 246.0
+offset_bottom = 32.0
 text = "Big"
 
 [node name="Reference" type="Sprite2D" parent="."]
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(89, 157)
-texture = ExtResource("1_ox6fa")
+position = Vector2(143, 99)
+texture = ExtResource("1_vfmx3")
 centered = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true
-offset_left = 514.0
-offset_top = 162.0
-offset_right = 867.0
-offset_bottom = 569.0
+offset_left = 630.0
+offset_top = 100.0
+offset_right = 983.0
+offset_bottom = 507.0
 mouse_filter = 2
 stretch = true
 
@@ -89,3 +91,11 @@ z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("3_x6u8v")
 centered = false
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 1074.0
+offset_top = 26.0
+offset_right = 1111.0
+offset_bottom = 57.0
+text = "Exit
+"
