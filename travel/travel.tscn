@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sx8tdyuorhh0"]
+[gd_scene load_steps=16 format=3 uid="uid://sx8tdyuorhh0"]
 
 [ext_resource type="Script" path="res://travel/travel.gd" id="1_a7l70"]
 [ext_resource type="Texture2D" uid="uid://bowckcu4j42tm" path="res://assets/art/office.png" id="2_j8a5x"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dr0kgu01vpntd" path="res://assets/art/door.png" id="5_hujf4"]
 [ext_resource type="Texture2D" uid="uid://iyr53df26fet" path="res://assets/art/computer.png" id="6_lcvj4"]
 [ext_resource type="Script" path="res://travel/Door.gd" id="8_k5m5p"]
+[ext_resource type="PackedScene" uid="uid://cuywgdlpnhhe3" path="res://travel/painting.tscn" id="9_lcfw1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ffya"]
 texture = ExtResource("2_j8a5x")
@@ -3199,7 +3200,7 @@ layer_0/tile_data = PackedInt32Array(524287, 2, 1, 589823, 2, 2, 655359, 2, 3, 7
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 100
 y_sort_enabled = true
-position = Vector2(675, 421)
+position = Vector2(3775, 353)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_ra75s")
 
@@ -3247,3 +3248,40 @@ texture = ExtResource("6_lcvj4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactables/Computer"]
 position = Vector2(43, 50.5)
 shape = SubResource("RectangleShape2D_mkhjo")
+
+[node name="Painting-1" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(3333, 345)
+frame_index = 1
+
+[node name="Painting-2" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(5151, 334)
+art_index = 2
+frame_index = 1
+
+[node name="Painting-3" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(4190, 337)
+art_index = 3
+frame_index = 1
+
+[node name="Painting-4" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(4440, 342)
+art_index = 4
+frame_index = 3
+
+[node name="Painting-5" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(3677, 331)
+art_index = 5
+
+[node name="Painting-6" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(5641, 329)
+art_index = 6
+frame_index = 3
+
+[node name="Painting-7" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(6145, 309)
+art_index = 7
+
+[node name="Painting-8" parent="Interactables" instance=ExtResource("9_lcfw1")]
+position = Vector2(6333, 309)
+art_index = 8
+frame_index = 1

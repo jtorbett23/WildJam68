@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuywgdlpnhhe3"]
+
+[ext_resource type="Script" path="res://travel/painting.gd" id="1_dicy6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkhjo"]
+size = Vector2(120, 257)
+
+[node name="Painting" type="Area2D"]
+script = ExtResource("1_dicy6")
+frame_index = 2
+
+[node name="Frame" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mkhjo")
+
+[node name="Art" type="Sprite2D" parent="."]

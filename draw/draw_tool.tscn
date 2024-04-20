@@ -76,6 +76,7 @@ centered = false
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true
+layout_mode = 0
 offset_left = 630.0
 offset_top = 100.0
 offset_right = 983.0
@@ -99,6 +100,7 @@ texture = ExtResource("3_x6u8v")
 centered = false
 
 [node name="Exit" type="Button" parent="."]
+layout_mode = 0
 offset_left = 904.0
 offset_top = 16.0
 offset_right = 941.0
