@@ -5,7 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://c0usmyrdmj6bj" path="res://assets/art/painting/painting-1-edited-export.png" id="2_y05h8"]
 [ext_resource type="Texture2D" uid="uid://bv53wcmhac8xl" path="res://assets/art/canvas.png" id="3_x6u8v"]
 
-[node name="DrawTool" type="Node2D"]
+[node name="DrawTool" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_kiyld")
 
 [node name="Colours" type="Node2D" parent="."]
@@ -93,9 +99,9 @@ texture = ExtResource("3_x6u8v")
 centered = false
 
 [node name="Exit" type="Button" parent="."]
-offset_left = 1074.0
-offset_top = 26.0
-offset_right = 1111.0
-offset_bottom = 57.0
+offset_left = 904.0
+offset_top = 16.0
+offset_right = 941.0
+offset_bottom = 47.0
 text = "Exit
 "

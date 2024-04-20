@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed : int = 800
+@export var speed : int = 600
 var interactable = false
 var settingsMenu = preload("res://menu/settingsMenu.tscn")
 var enabled : bool = false
@@ -27,7 +27,7 @@ func _input(event):
 				Camera.transition.fade("Draw")
 				travel_scene.free()
 
-var rotate_time = 0.3
+var rotate_time = 0.35
 var rotate_timer = 0
 var rotate_value = 15
 

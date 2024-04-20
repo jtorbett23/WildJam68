@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var exit_button = $Exit
 func _ready():

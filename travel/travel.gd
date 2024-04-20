@@ -12,7 +12,7 @@ func _ready():
 	Camera.transition.connect("faded_out", handle_transition_end)
 	Camera.set_follow(player)
 	Camera.set_position_y(0)
-	AudioManager.play_music("daytime.mp3")
+	AudioManager.play_music("nighttime.mp3")
 	for child in interactables.get_children():
 		if(child.get_class() == "Area2D"):
 			child.connect("body_entered", on_area_entered.bind(child))
