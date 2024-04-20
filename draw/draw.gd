@@ -23,6 +23,16 @@ func _draw():
 	for data in draw_data:
 		draw_circle(data.pos, data.radius, data.colour)
 
+func get_avaliable_paintings():
+	var paintings = GameData.get_dict("Paintings")
+	var available_paintings = {}
+	for key in paintings.keys():
+		if(paintings[key]["is_placed"] == false):
+			available_paintings[key] = paintings[key]
+	return available_paintings
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.play_music("drawing.mp3")
@@ -31,7 +41,10 @@ func _ready():
 	
 	for child : Button in sizes.get_children():
 		child.connect("pressed", change_size.bind(child.name))
-
+	var paintings = get_avaliable_paintings()
+	if(paintings.size() == 0):
+		pass
+	# else:
 	var bg_img_size = background.texture.get_image().get_size()
 	var ref_img_size = reference.texture.get_image().get_size()
 	print(ref_img_size, bg_img_size)
@@ -41,7 +54,6 @@ func _ready():
 	# var scale_y : float = float(canvas_size.y) / float(bg_img_size.y)
 	# var scale_ref_x : float = float(canvas_size.x) / float(ref_img_size.x)
 	# var scale_ref_y : float = float(canvas_size.y) / float(ref_img_size.y)
-	print(scale_x, scale_y)
 	background.scale = Vector2(scale_x, scale_y)
 	# reference.scale = Vector2(scale_ref_x, scale_ref_y)
 	# ref_background.scale = Vector2(scale_x, scale_y)
@@ -49,20 +61,16 @@ func _ready():
 	var background_size = background.get_rect().size * background.transform.get_scale()
 	min_pos = background.global_position
 	max_pos = min_pos + background_size
-	# print(min_pos, max_pos)
-	# await RenderingServer.frame_post_draw
-	# ref_img = subviewport.get_texture().get_image()
-	pass # Replace with function body.
 
 func change_colour(_colour_name):
+	AudioManager.play_sound("droplet.mp3")
 	if _colour_name == "Black":
 		colour = Color.BLACK
-	elif _colour_name == "Pink":
-		colour = Color.PINK
-	elif _colour_name == "Blue":
-		colour = Color.BLUE
+	elif _colour_name == "White":
+		colour = Color.WHITE
 
 func change_size(_radius_size):
+	AudioManager.play_sound("brush.mp3")
 	if _radius_size == "Small":
 		radius = 10
 	elif _radius_size == "Medium":
@@ -98,11 +106,9 @@ func _process(delta):
 			draw_data = prev
 		elif(previous_draw.size() == 0):
 			previous_draw = [[]]
-		#undo v1
-		# draw_data.pop_back()
-	if Input.is_action_just_pressed("screenshot"):
-		print("click wow")
-		take_pic("Canvas")
+	# if Input.is_action_just_pressed("screenshot"):
+	# 	print("click wow")
+	# 	take_pic("Canvas")
 	if Input.is_action_just_pressed("compare"):
 		compare_with_reference()	
 	queue_redraw()

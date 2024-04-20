@@ -32,3 +32,9 @@ func get_value(dict_name, key):
 		if(key in paintings.keys()):
 			return paintings[key]
 
+func get_dict(dict_name):
+	if(dict_name == "Settings"):
+		return settings
+	elif(dict_name == "Paintings"):
+		return paintings
+
