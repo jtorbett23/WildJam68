@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsfnwfx16k1ha"
-path="res://.godot/imported/Fe6-01-map.png-f4cbece0810626ab2146a326fa40e2c0.ctex"
+uid="uid://bgwnst532hnw8"
+path="res://.godot/imported/painting-5.png-fdf0a117c648f2e1310cbf2b10687d5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Fe6-01-map.png"
-dest_files=["res://.godot/imported/Fe6-01-map.png-f4cbece0810626ab2146a326fa40e2c0.ctex"]
+source_file="res://assets/art/painting/painting-5.png"
+dest_files=["res://.godot/imported/painting-5.png-fdf0a117c648f2e1310cbf2b10687d5d.ctex"]
 
 [params]
 

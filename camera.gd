@@ -15,12 +15,15 @@ func set_follow(new_target):
 	anchor_mode = Camera2D.ANCHOR_MODE_DRAG_CENTER
 	target = new_target
 
+func set_position_y(pos_y):
+	position.y = pos_y + get_viewport().get_size().y / 2
+
+
 func set_static():
 	anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
+	position = Vector2.ZERO
 	target = null
 
 func _process(_delta):
 	if(target):
-		position = target.position
-
-
+		position.x = target.position.x

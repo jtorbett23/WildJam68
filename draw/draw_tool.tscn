@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgeefikyffu0l"]
 
 [ext_resource type="Script" path="res://draw/draw_tool.gd" id="1_kiyld"]
-[ext_resource type="Texture2D" uid="uid://c0usmyrdmj6bj" path="res://assets/art/painting-1-edited-export.png" id="1_vfmx3"]
 [ext_resource type="Script" path="res://draw/draw.gd" id="2_cgdce"]
+[ext_resource type="Texture2D" uid="uid://c0usmyrdmj6bj" path="res://assets/art/painting/painting-1-edited-export.png" id="2_y05h8"]
 [ext_resource type="Texture2D" uid="uid://bv53wcmhac8xl" path="res://assets/art/canvas.png" id="3_x6u8v"]
 
 [node name="DrawTool" type="Node2D"]
@@ -63,7 +63,7 @@ z_index = -1
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(143, 99)
-texture = ExtResource("1_vfmx3")
+texture = ExtResource("2_y05h8")
 centered = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]

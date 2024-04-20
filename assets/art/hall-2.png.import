@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwokgu36pj0we"
-path="res://.godot/imported/painting-5-edited.png-8fd81f0c388b89b8060175cb0b989b99.ctex"
+uid="uid://dqvnjcc8y8262"
+path="res://.godot/imported/hall-2.png-8bfd25786d3364eee66649286c03f58e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/painting-5-edited.png"
-dest_files=["res://.godot/imported/painting-5-edited.png-8fd81f0c388b89b8060175cb0b989b99.ctex"]
+source_file="res://assets/art/hall-2.png"
+dest_files=["res://.godot/imported/hall-2.png-8bfd25786d3364eee66649286c03f58e.ctex"]
 
 [params]
 
