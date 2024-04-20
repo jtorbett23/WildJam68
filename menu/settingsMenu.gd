@@ -6,8 +6,8 @@ extends Control
 
 
 func _ready():
-	music_level_label.text = str(GameData.get_value("music_level"))
-	sound_level_label.text = str(GameData.get_value("sound_level"))
+	music_level_label.text = str(GameData.get_value("Settings","music_level"))
+	sound_level_label.text = str(GameData.get_value("Settings","sound_level"))
 	for button in find_buttons(options):
 		button.connect("pressed", handle_button.bind(button.name))
 
@@ -43,12 +43,12 @@ func change_volume(player, change):
 		level = float(music_level_label.text)
 		level += change
 		music_level_label.text = str(level)
-		GameData.set_value("music_level", level)
+		GameData.set_value("Settings","music_level", level)
 		AudioManager.change_music_volume(level)
 	elif(player == "Sound"):
 		level = float(sound_level_label.text)
 		level += change
 		sound_level_label.text = str(level)
-		GameData.set_value("sound_level", level)
+		GameData.set_value("Settings", "sound_level", level)
 		AudioManager.change_sound_volume(level)
 	

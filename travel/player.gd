@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed : int = 600
 var interactable = false
 var settingsMenu = preload("res://menu/settingsMenu.tscn")
-var enabled : bool = true #CHANGE BACK
+var enabled : bool = false
 @onready var travel_scene = $"../"
 var height_change = 40
 

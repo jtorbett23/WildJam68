@@ -14,16 +14,21 @@ var canvas_info: Dictionary = {
 @onready var art : Sprite2D = $Art
 @onready var frame : Sprite2D = $Frame
 func _ready():
-	
+	var painting_info = GameData.get_value("Paintings", art_index)
 	var frame_path = "res://assets/art/frame-{0}.png".format({"0": str(frame_index)})
 	frame.texture = load(frame_path)
 	#check for the painting
 	#is there a painting placed
 	#is it the real or the forged
-	var art_path = "res://assets/art/painting/painting-{0}.png".format({"0": str(art_index)})
-	art.texture = load(art_path)
-	art.position = canvas_info[frame_index]["pos"]
-	art.scale = canvas_info[frame_index]["size"] / art.texture.get_size()
+	if(painting_info["is_placed"] == true):
+		var art_path
+		if(painting_info["is_forged"] == true):
+			art_path = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(art_index)})
+		else:
+			art_path = "res://assets/art/painting/painting-{0}.png".format({"0": str(art_index)})
+		art.texture = load(art_path)
+		art.position = canvas_info[frame_index]["pos"]
+		art.scale = canvas_info[frame_index]["size"] / art.texture.get_size()
 
 	pass
 	#convert size of painting to canvas

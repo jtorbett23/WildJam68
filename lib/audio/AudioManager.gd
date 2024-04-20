@@ -30,8 +30,8 @@ func _ready():
 	music_player.finished.connect(_on_music_finished.bind(music_player))
 	add_child(music_player)
 
-	sound_level = GameData.get_value("sound_level")
-	music_level = GameData.get_value("music_level")
+	sound_level = GameData.get_value("Settings", "sound_level")
+	music_level = GameData.get_value("Settings", "music_level")
 	change_sound_volume(sound_level)
 	change_music_volume(music_level)
 
