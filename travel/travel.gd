@@ -33,8 +33,10 @@ func handle_transition_end():
 	player.enabled = true
 
 func on_area_entered(_event, target):
+	player.qmark.visible = true
 	player.interactable = target
 
 func on_area_exited(_event, target):
 	if(player.interactable == target):
+		player.qmark.visible = false
 		player.interactable = null

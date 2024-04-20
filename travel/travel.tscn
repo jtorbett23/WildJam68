@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://sx8tdyuorhh0"]
+[gd_scene load_steps=20 format=3 uid="uid://sx8tdyuorhh0"]
 
 [ext_resource type="Script" path="res://travel/travel.gd" id="1_a7l70"]
 [ext_resource type="Texture2D" uid="uid://bowckcu4j42tm" path="res://assets/art/office.png" id="2_j8a5x"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b8tfro11o2uhh" path="res://assets/art/herb-no-flash.png" id="4_iyo3e"]
 [ext_resource type="Texture2D" uid="uid://dr0kgu01vpntd" path="res://assets/art/door.png" id="5_hujf4"]
 [ext_resource type="Texture2D" uid="uid://iyr53df26fet" path="res://assets/art/computer.png" id="6_lcvj4"]
+[ext_resource type="Texture2D" uid="uid://bd1f3vd64f6ql" path="res://assets/art/q-mark.png" id="6_nh68t"]
+[ext_resource type="PackedScene" uid="uid://c6upbp54goduo" path="res://sure.tscn" id="7_h51m1"]
 [ext_resource type="Script" path="res://travel/Door.gd" id="8_k5m5p"]
 [ext_resource type="PackedScene" uid="uid://cuywgdlpnhhe3" path="res://travel/painting.tscn" id="9_lcfw1"]
 
@@ -3167,7 +3169,7 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_2ffya")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ht121"]
-size = Vector2(262, 212)
+size = Vector2(208, 212)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6gb6"]
 size = Vector2(137, 244.5)
@@ -3178,8 +3180,23 @@ size = Vector2(157, 258)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkhjo"]
 size = Vector2(120, 257)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j6kd"]
+size = Vector2(177.5, 258)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj8ct"]
+size = Vector2(157, 258)
+
 [node name="Travel" type="Node2D"]
 script = ExtResource("1_a7l70")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Sure" parent="UI" instance=ExtResource("7_h51m1")]
+visible = false
+offset_left = 262.0
+offset_top = 221.0
+offset_right = 302.0
+offset_bottom = 261.0
 
 [node name="Rooms" type="Node2D" parent="."]
 
@@ -3200,7 +3217,7 @@ layer_0/tile_data = PackedInt32Array(524287, 2, 1, 589823, 2, 2, 655359, 2, 3, 7
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 100
 y_sort_enabled = true
-position = Vector2(577, 419)
+position = Vector2(701, 415)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_ra75s")
 
@@ -3208,10 +3225,14 @@ script = ExtResource("2_ra75s")
 texture = ExtResource("4_iyo3e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(50, 75)
+position = Vector2(54, 75)
 shape = SubResource("RectangleShape2D_ht121")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+[node name="QMark" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(28, -238)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_nh68t")
 
 [node name="Interactables" type="Node2D" parent="."]
 
@@ -3250,7 +3271,7 @@ position = Vector2(43, 50.5)
 shape = SubResource("RectangleShape2D_mkhjo")
 
 [node name="Painting-1" parent="Interactables" instance=ExtResource("9_lcfw1")]
-position = Vector2(3333, 345)
+position = Vector2(3367, 333)
 frame_index = 1
 
 [node name="Painting-2" parent="Interactables" instance=ExtResource("9_lcfw1")]
@@ -3278,10 +3299,28 @@ art_index = 6
 frame_index = 3
 
 [node name="Painting-7" parent="Interactables" instance=ExtResource("9_lcfw1")]
-position = Vector2(6145, 309)
+position = Vector2(6097, 310)
 art_index = 7
 
 [node name="Painting-8" parent="Interactables" instance=ExtResource("9_lcfw1")]
-position = Vector2(6333, 309)
+position = Vector2(6307, 312)
 art_index = 8
 frame_index = 1
+
+[node name="Hall-Exit-1" type="Area2D" parent="Interactables" node_paths=PackedStringArray("target")]
+position = Vector2(3108, 317)
+script = ExtResource("8_k5m5p")
+target = NodePath("../Office-Enter")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactables/Hall-Exit-1"]
+position = Vector2(12.25, 47)
+shape = SubResource("RectangleShape2D_2j6kd")
+
+[node name="Hall-Exit-2" type="Area2D" parent="Interactables" node_paths=PackedStringArray("target")]
+position = Vector2(228, 718)
+script = ExtResource("8_k5m5p")
+target = NodePath("../Office-Enter")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactables/Hall-Exit-2"]
+position = Vector2(6300, -354)
+shape = SubResource("RectangleShape2D_mj8ct")

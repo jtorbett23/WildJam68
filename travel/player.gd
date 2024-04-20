@@ -8,7 +8,12 @@ var enabled : bool = false
 var height_change = 40
 
 @onready var sprite = $Sprite2D
+@onready var qmark = $QMark
 
+@onready var sure = $"../UI/Sure"
+
+func _ready():
+	sure.connect("response", handle_response)
 
 func _input(event):
 	if event.is_action_pressed("interact"):
@@ -18,14 +23,25 @@ func _input(event):
 				Camera.transition.fade(Vector2(interactable.target.position.x, position.y - height_change))
 			elif(interactable.name == "Office-Enter"):
 				Camera.transition.fade(Vector2(interactable.target.position.x, position.y + height_change))
-			elif(interactable.name == "Exit"):
-				print("Exit Hall")
 			elif("Painting" in interactable.name):
 				print(interactable.name)
+			elif("Hall-Exit" in interactable.name):
+				sure.show()
+				sure.setup("exit", "Exiting will end the heist")
+				enabled = false
 			elif(interactable.name == "Computer"):
 				Camera.target = null
 				Camera.transition.fade("Draw")
 				travel_scene.free()
+
+func handle_response(choice, topic):
+	enabled = true
+	if(topic == "exit"):
+		if(choice == "yes"):
+			Camera.transition.fade("End")
+
+	
+				
 
 var rotate_time = 0.35
 var rotate_timer = 0
@@ -38,6 +54,7 @@ func _physics_process(delta):
 			velocity.x = speed
 			sprite.flip_h = false
 			$CollisionShape2D.position.x = 50
+			qmark.position.x = 28
 			rotate_timer += delta
 			if(rotate_timer > rotate_time):
 				rotate_timer = 0
@@ -51,6 +68,7 @@ func _physics_process(delta):
 			velocity.x = -speed
 			sprite.flip_h = true
 			$CollisionShape2D.position.x = -50
+			qmark.position.x = -28
 			rotate_timer += delta
 			if(rotate_timer > rotate_time):
 				rotate_timer = 0
