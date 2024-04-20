@@ -11,6 +11,9 @@ var canvas_info: Dictionary = {
 	
 }
 
+var is_placed = true
+var is_forged = false
+
 @onready var art : Sprite2D = $Art
 @onready var frame : Sprite2D = $Frame
 func _ready():
@@ -29,6 +32,13 @@ func _ready():
 		art.texture = load(art_path)
 		art.position = canvas_info[frame_index]["pos"]
 		art.scale = canvas_info[frame_index]["size"] / art.texture.get_size()
+	is_placed = painting_info["is_placed"]
+	is_forged = painting_info["is_forged"]
 
-	pass
-	#convert size of painting to canvas
+func update_placed(placed_status):
+	GameData.set_value("Settings", art_index, {"is_placed": placed_status, "is_forged": is_forged})
+	is_placed = placed_status
+	if(is_placed == false):
+		art.visible = false
+	else:
+		art.visible = true

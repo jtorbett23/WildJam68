@@ -24,21 +24,28 @@ func _input(event):
 			elif(interactable.name == "Office-Enter"):
 				Camera.transition.fade(Vector2(interactable.target.position.x, position.y + height_change))
 			elif("Painting" in interactable.name):
-				print(interactable.name)
+				if(interactable.is_placed == true and interactable.is_forged == false):
+					sure.show()
+					sure.setup("take this painting", "", interactable)
 			elif("Hall-Exit" in interactable.name):
 				sure.show()
-				sure.setup("exit", "Exiting will end the heist")
+				sure.setup("exit", "Exiting will end the heist", null)
 				enabled = false
 			elif(interactable.name == "Computer"):
 				Camera.target = null
 				Camera.transition.fade("Draw")
 				travel_scene.free()
 
-func handle_response(choice, topic):
+func handle_response(choice, topic, target):
 	enabled = true
 	if(topic == "exit"):
 		if(choice == "yes"):
 			Camera.transition.fade("End")
+	if(topic == "take this painting"):
+		if(choice == "yes"):
+			target.update_placed(false)
+			sure.target = false
+
 
 	
 				

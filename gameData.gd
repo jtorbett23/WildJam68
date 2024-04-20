@@ -16,7 +16,7 @@ var paintings : Dictionary = {
 	8 : {"is_placed": true, "is_forged": false},
 }
 
-func set__value(dict_name, key, value) -> void:
+func set_value(dict_name, key, value) -> void:
 	if(dict_name == "Settings"):
 		if(key in settings.keys()):
 			settings[key] = value
