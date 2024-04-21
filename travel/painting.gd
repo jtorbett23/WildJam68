@@ -57,8 +57,8 @@ func update_art(placed_status, forged_status):
 		GameData.money += value
 		var peak_snr = painting_info["peak_snr"]
 		var new_sus = 0
-		if(peak_snr < 15):
-			new_sus = floor(15 - peak_snr)
+		if(peak_snr < GameData.threshold):
+			new_sus = floor(GameData.threshold - peak_snr)
 		GameData.sus += new_sus
 		status.update_text()
 		art.visible = true

@@ -4,11 +4,21 @@ extends Control
 
 @onready var text_label = $EndingText
 
+@onready var results_holder = $VFlowContainer
+
+var result_ref = preload("res://result.tscn")
+
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	AudioManager.play_music("daytime.mp3")
 	Camera.set_static()
+	var painting_ids = get_final_paintings_ids()
+	for id in painting_ids:
+		var new_result = result_ref.instantiate()
+		results_holder.add_child(new_result)
+		new_result.setup_result(id)
+		
 
 	#check if painting was not placed back
 	check_for_no_replacements()
@@ -33,11 +43,20 @@ func _ready():
 	var text = "
 	Thank you for playing.\n
 	You earned £{0} with the target of {4}
-	Your final Suspicion Level was {1}%
+	Your final Suspicion Level was {1}% - Any non-returned paintings adds 20%
 	Herb {2} and {3}.
 	".format({"0": GameData.money, "1": GameData.sus, "2": money_text, "3": caught_text, "4": GameData.money_target})
 	text_label.text = text
 	print(GameData.get_dict("Paintings"))
+
+func get_final_paintings_ids():
+	var p_ids = []
+	var paintings = GameData.get_dict("Paintings")
+	for key in paintings.keys():
+		if(paintings[key]["is_placed"] == true and paintings[key]["is_forged"] == true):
+			p_ids.append(key)
+	return p_ids
+
 
 func check_for_no_replacements():
 	var paintings = GameData.get_dict("Paintings")
@@ -58,11 +77,6 @@ func roll_caught(total_rolls, amount_needed, threshold):
 	else:
 		return true
 
-
-
-# var new_sus = 0
-# if(peak_snr < 15):
-# 	new_sus = floor(15 - peak_snr)
 
 func handle_return():
 	Camera.transition.fade("Main")

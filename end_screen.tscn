@@ -28,16 +28,31 @@ offset_bottom = 469.0
 text = "Return to Main Menu"
 
 [node name="EndingText" type="RichTextLabel" parent="."]
-offset_left = 209.0
-offset_top = 111.0
-offset_right = 728.0
-offset_bottom = 305.0
+offset_left = 54.0
+offset_top = 102.0
+offset_right = 554.0
+offset_bottom = 296.0
 text = "Continue"
 
 [node name="Label-Outcome" type="Label" parent="."]
 layout_mode = 0
-offset_left = 395.0
-offset_top = 56.0
-offset_right = 467.0
-offset_bottom = 79.0
+offset_left = 54.0
+offset_top = 45.0
+offset_right = 126.0
+offset_bottom = 68.0
 text = "Outcome"
+
+[node name="VFlowContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 569.0
+offset_top = 92.0
+offset_right = 869.0
+offset_bottom = 542.0
+theme_override_constants/separation = 65
+
+[node name="Label-Results" type="Label" parent="."]
+offset_left = 627.0
+offset_top = 19.0
+offset_right = 751.0
+offset_bottom = 42.0
+text = "Painting Results"

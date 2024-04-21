@@ -41,6 +41,7 @@ var prev_draw_data : Dictionary = {
 var money = 0
 var money_target = 3000
 var sus = 0
+var threshold = 20                                                                                                                                                                                                                                                                       
 
 func set_value(dict_name, key, value) -> void:
 	if(dict_name == "Settings"):
