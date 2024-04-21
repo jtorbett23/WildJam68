@@ -27,6 +27,17 @@ var draw_data : Dictionary = {
 	8 : [],
 }
 
+var prev_draw_data : Dictionary = {
+	1 : [[]],
+	2 : [[]],
+	3 : [[]],
+	4 : [[]],
+	5 : [[]],
+	6 : [[]],
+	7 : [[]],
+	8 : [[]],
+}
+
 func set_value(dict_name, key, value) -> void:
 	if(dict_name == "Settings"):
 		if(key in settings.keys()):
@@ -53,6 +64,8 @@ func get_dict(dict_name):
 		return paintings
 	elif(dict_name == "Draw"):
 		return draw_data
+	elif(dict_name == "Prev-Draw"):
+		return prev_draw_data
 
 func set_dict(dict_name, dict):
 	if(dict_name == "Settings"):
@@ -61,5 +74,7 @@ func set_dict(dict_name, dict):
 		paintings = dict
 	elif(dict_name == "Draw"):
 		draw_data = dict
+	elif(dict_name == "Prev-Draw"):
+		prev_draw_data = dict
 	
 

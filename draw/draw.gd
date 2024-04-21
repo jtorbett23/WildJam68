@@ -10,6 +10,7 @@ var max_pos : Vector2
 var canvas_size = Vector2(500,500)
 
 var draw_datas : Dictionary = {}
+var previous_draw_datas : Dictionary = {}
 
 @onready var colours : Node2D = $"../../../Colours"
 @onready var sizes : Node2D = $"../../../Sizes"
@@ -31,6 +32,7 @@ func _draw():
 
 func get_avaliable_paintings():
 	draw_datas = GameData.get_dict("Draw")
+	previous_draw_datas = GameData.get_dict("Prev-Draw")
 	var paintings = GameData.get_dict("Paintings")
 	var available_paintings = {}
 	for key in paintings.keys():
@@ -116,6 +118,7 @@ func change_reference(direction):
 func update_current_reference():
 	var new_painting_id = painting_dict.keys()[painting_index]
 	draw_data = draw_datas[new_painting_id]
+	previous_draw = previous_draw_datas[new_painting_id]
 	var new_painting_path = "res://assets/art/painting/painting-{0}-edited.png".format({"0": new_painting_id})
 	reference.texture = load(new_painting_path)
 
@@ -137,18 +140,18 @@ func _process(delta):
 			if(draw_datas[painting_id].find(draw_event) == -1):
 				draw_datas[painting_id].append(draw_event)
 				#undo v2
-				previous_draw.append(draw_datas[painting_id].duplicate())
+				previous_draw_datas[painting_id].append(draw_datas[painting_id].duplicate())
 		elif Input.is_action_just_pressed("clear"):
 			draw_datas[painting_id] = []
 			#undo v2
-			previous_draw.append([])
+			previous_draw_datas[painting_id].append([])
 		elif Input.is_action_pressed("undo"):
 			#undo v2
-			if(previous_draw.size() > 0):
-				var prev = previous_draw.pop_back()
+			if(previous_draw_datas[painting_id].size() > 0):
+				var prev = previous_draw_datas[painting_id].pop_back()
 				draw_datas[painting_id] = prev
-			elif(previous_draw.size() == 0):
-				previous_draw = [[]]	
+			elif(previous_draw_datas[painting_id].size() == 0):
+				previous_draw_datas[painting_id] = [[]]	
 		queue_redraw()
 
 
@@ -174,6 +177,7 @@ func compare_with_reference():
 
 func save_draw_data():
 	GameData.set_dict("Draw", draw_datas)
+	GameData.set_dict("Prev-Draw", previous_draw_datas)
 
 func compare_images(image1, image2):
 	print("Image 1 with 2")
