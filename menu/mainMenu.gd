@@ -7,6 +7,7 @@ var settingsMenu = preload("res://menu/settingsMenu.tscn")
 signal start_game
 
 func _ready():
+	GameData.reset_state()
 	AudioManager.play_music("menu.mp3")
 	Camera.set_static()
 	for child : Button in buttons_menu.get_children():

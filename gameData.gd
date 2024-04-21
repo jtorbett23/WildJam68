@@ -5,7 +5,7 @@ var settings : Dictionary = {
 	"sound_level": 50
 }
 
-var paintings : Dictionary = {
+var paintings_inital : Dictionary = {
 	1 : {"is_placed": true, "is_forged": false, "value": 900, "peak_snr": 0},
 	2 : {"is_placed": true, "is_forged": false, "value": 1000, "peak_snr": 0},
 	3 : {"is_placed": true, "is_forged": false, "value": 800, "peak_snr": 0},
@@ -16,7 +16,9 @@ var paintings : Dictionary = {
 	8 : {"is_placed": true, "is_forged": false, "value": 900, "peak_snr": 0},
 }
 
-var draw_data : Dictionary = {
+var paintings : Dictionary = paintings_inital.duplicate(true)
+
+var draw_data_inital : Dictionary = {
 	1 : [],
 	2 : [],
 	3 : [],
@@ -27,7 +29,10 @@ var draw_data : Dictionary = {
 	8 : [],
 }
 
-var prev_draw_data : Dictionary = {
+var draw_data : Dictionary = draw_data_inital.duplicate(true)
+
+
+var prev_draw_data_inital  : Dictionary = {
 	1 : [[]],
 	2 : [[]],
 	3 : [[]],
@@ -37,6 +42,8 @@ var prev_draw_data : Dictionary = {
 	7 : [[]],
 	8 : [[]],
 }
+
+var prev_draw_data : Dictionary = prev_draw_data_inital.duplicate(true)
 
 var money = 0
 var money_target = 3000
@@ -82,4 +89,10 @@ func set_dict(dict_name, dict):
 	elif(dict_name == "Prev-Draw"):
 		prev_draw_data = dict
 	
+func reset_state():
+	sus = 0
+	money = 0
+	paintings = paintings_inital.duplicate(true)
+	draw_data = draw_data_inital.duplicate(true)
+	prev_draw_data = prev_draw_data_inital.duplicate(true)
 

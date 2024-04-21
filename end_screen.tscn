@@ -21,6 +21,7 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="Return" type="Button" parent="."]
+layout_mode = 0
 offset_left = 400.0
 offset_top = 438.0
 offset_right = 573.0
@@ -28,6 +29,7 @@ offset_bottom = 469.0
 text = "Return to Main Menu"
 
 [node name="EndingText" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 54.0
 offset_top = 102.0
 offset_right = 554.0
@@ -51,6 +53,7 @@ offset_bottom = 542.0
 theme_override_constants/separation = 65
 
 [node name="Label-Results" type="Label" parent="."]
+layout_mode = 0
 offset_left = 627.0
 offset_top = 19.0
 offset_right = 751.0
