@@ -1,7 +1,7 @@
 extends Node2D
 
 var colour = Color.BLACK	
-var radius = 20
+var radius = 10
 
 var draw_data : Array = []
 var previous_draw : Array = [[]]
@@ -18,6 +18,11 @@ var canvas_size = Vector2(500,500)
 @onready var background : Sprite2D = $"Background"
 # @onready var ref_background : Sprite2D =  $"../../../RefBackground"
 @onready var reference : Sprite2D = $"../../../Reference"
+@onready var print_button : Button = $"../../../Print"
+@onready var toggle : Node2D =$"../../../Toggle"
+
+var painting_dict = {}
+var painting_index = 0
 
 func _draw():
 	for data in draw_data:
@@ -32,35 +37,51 @@ func get_avaliable_paintings():
 	return available_paintings
 
 
-
+var is_setup = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	AudioManager.play_music("drawing.mp3")
-	for child : Button in colours.get_children():
-		child.connect("pressed", change_colour.bind(child.name))
-	
-	for child : Button in sizes.get_children():
-		child.connect("pressed", change_size.bind(child.name))
-	var paintings = get_avaliable_paintings()
-	if(paintings.size() == 0):
-		pass
-	# else:
-	var bg_img_size = background.texture.get_image().get_size()
-	var ref_img_size = reference.texture.get_image().get_size()
-	print(ref_img_size, bg_img_size)
-	var scale_x : float = float(ref_img_size.x) / float(bg_img_size.x)
-	var scale_y : float = float(ref_img_size.y) / float(bg_img_size.y)
-	# var scale_x : float = float(canvas_size.x) / float(bg_img_size.x)
-	# var scale_y : float = float(canvas_size.y) / float(bg_img_size.y)
-	# var scale_ref_x : float = float(canvas_size.x) / float(ref_img_size.x)
-	# var scale_ref_y : float = float(canvas_size.y) / float(ref_img_size.y)
-	background.scale = Vector2(scale_x, scale_y)
+	print_button.connect("pressed", print_forgery)
+	for child in colours.get_children():
+		if(child.get_class() == "Button"):
+			child.connect("pressed", change_colour.bind(child.name))
+	for child in toggle.get_children():
+		if(child.get_class() == "Button"):
+			child.connect("pressed", change_reference.bind(child.name))
+	for child in sizes.get_children():
+		if(child.get_class() == "Button"):
+			child.connect("pressed", change_size.bind(child.name))
+	painting_dict = get_avaliable_paintings()
+	if(painting_dict.size() > 0):
+		print_button.visible = true
+		if(painting_dict.size() > 1):
+			toggle.show()
+		var first_painting_id = painting_dict.keys()[painting_index]
+		var first_painting_path = "res://assets/art/painting/painting-{0}-edited.png".format({"0": first_painting_id})
+		reference.texture = load(first_painting_path)
+		var bg_img_size = background.texture.get_image().get_size()
+		var ref_img_size = reference.texture.get_image().get_size()
+		print(ref_img_size, bg_img_size)
+		var scale_x : float = float(ref_img_size.x) / float(bg_img_size.x)
+		var scale_y : float = float(ref_img_size.y) / float(bg_img_size.y)
+		# var scale_x : float = float(canvas_size.x) / float(bg_img_size.x)
+		# var scale_y : float = float(canvas_size.y) / float(bg_img_size.y)
+		# var scale_ref_x : float = float(canvas_size.x) / float(ref_img_size.x)
+		# var scale_ref_y : float = float(canvas_size.y) / float(ref_img_size.y)
+		background.scale = Vector2(scale_x, scale_y)
+	else:
+		background.scale = Vector2(3,3)
 	# reference.scale = Vector2(scale_ref_x, scale_ref_y)
 	# ref_background.scale = Vector2(scale_x, scale_y)
 	subviewport_container.size = background.get_rect().size * background.transform.get_scale()
 	var background_size = background.get_rect().size * background.transform.get_scale()
 	min_pos = background.global_position
 	max_pos = min_pos + background_size
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	is_setup = true
+	AudioManager.play_music("drawing.mp3")
 
 func change_colour(_colour_name):
 	AudioManager.play_sound("droplet.mp3")
@@ -72,11 +93,30 @@ func change_colour(_colour_name):
 func change_size(_radius_size):
 	AudioManager.play_sound("brush.mp3")
 	if _radius_size == "Small":
-		radius = 10
+		radius = 5
 	elif _radius_size == "Medium":
-		radius = 20
+		radius = 10
 	elif _radius_size == "Big":
-		radius = 40
+		radius = 20
+
+func change_reference(direction):
+	if(direction == "Next"):
+		painting_index += 1
+		toggle.get_node("Prev").visible = true
+		if(painting_index == painting_dict.size() -1):
+			toggle.get_node("Next").visible = false
+			
+	elif(direction == "Prev"):
+		painting_index -= 1
+		toggle.get_node("Next").visible = true
+		if(painting_index == 0):
+			toggle.get_node("Prev").visible = false
+	update_current_reference()
+
+func update_current_reference():
+	var new_painting_id = painting_dict.keys()[painting_index]
+	var new_painting_path = "res://assets/art/painting/painting-{0}-edited.png".format({"0": new_painting_id})
+	reference.texture = load(new_painting_path)
 
 func is_on_canvas(mouse_pos) -> bool:
 	#within min
@@ -88,41 +128,35 @@ func is_on_canvas(mouse_pos) -> bool:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var pos = get_global_mouse_position()
-	if Input.is_action_pressed("draw") and is_on_canvas(pos):
-		var draw_event = {"pos":pos, "radius": radius, "colour": colour}
-		if(draw_data.find(draw_event) == -1):
-			draw_data.append(draw_event)
+	if (is_setup == true):
+		var pos = get_global_mouse_position()
+		if Input.is_action_pressed("draw") and is_on_canvas(pos):
+			var draw_event = {"pos":pos, "radius": radius, "colour": colour}
+			if(draw_data.find(draw_event) == -1):
+				draw_data.append(draw_event)
+				#undo v2
+				previous_draw.append(draw_data.duplicate())
+		elif Input.is_action_just_pressed("clear"):
+			draw_data = []
 			#undo v2
-			previous_draw.append(draw_data.duplicate())
-	elif Input.is_action_just_pressed("clear"):
-		draw_data = []
-		#undo v2
-		previous_draw.append([])
-	elif Input.is_action_pressed("undo"):
-		#undo v2
-		if(previous_draw.size() > 0):
-			var prev = previous_draw.pop_back()
-			draw_data = prev
-		elif(previous_draw.size() == 0):
-			previous_draw = [[]]
-	# if Input.is_action_just_pressed("screenshot"):
-	# 	print("click wow")
-	# 	take_pic("Canvas")
-	if Input.is_action_just_pressed("compare"):
-		compare_with_reference()	
-	queue_redraw()
+			previous_draw.append([])
+		elif Input.is_action_pressed("undo"):
+			#undo v2
+			if(previous_draw.size() > 0):
+				var prev = previous_draw.pop_back()
+				draw_data = prev
+			elif(previous_draw.size() == 0):
+				previous_draw = [[]]	
+		queue_redraw()
 
 
-func take_pic(filename=""):
-	# background.visible = false
-	# await RenderingServer.frame_post_draw
+func print_forgery():
+	var forged_painting_id = painting_dict.keys()[painting_index]
 	var capture : Image = subviewport.get_texture().get_image()
-	# background.visible = true
 	var _time = Time.get_datetime_string_from_system()
-	var filepath = "./assets/user-art/{1}-Screenshot-{0}.png".format({"0": _time, "1":filename})
-
+	var filepath = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(forged_painting_id)})
 	capture.save_png(filepath)
+	GameData.set_value("Paintings", forged_painting_id, {"is_forged": true, "is_placed": false})
 	# subviewport.size = original_size
 
 func compare_with_reference():

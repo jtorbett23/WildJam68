@@ -13,6 +13,7 @@ var canvas_info: Dictionary = {
 
 var is_placed = true
 var is_forged = false
+var is_locked = false
 
 @onready var art : Sprite2D = $Art
 @onready var frame : Sprite2D = $Frame
@@ -27,18 +28,31 @@ func _ready():
 		var art_path
 		if(painting_info["is_forged"] == true):
 			art_path = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(art_index)})
+			var image = Image.load_from_file(art_path)
+			art.texture = ImageTexture.create_from_image(image)
 		else:
 			art_path = "res://assets/art/painting/painting-{0}.png".format({"0": str(art_index)})
-		art.texture = load(art_path)
+			art.texture = load(art_path)
 		art.position = canvas_info[frame_index]["pos"]
 		art.scale = canvas_info[frame_index]["size"] / art.texture.get_size()
 	is_placed = painting_info["is_placed"]
 	is_forged = painting_info["is_forged"]
 
-func update_placed(placed_status):
-	GameData.set_value("Settings", art_index, {"is_placed": placed_status, "is_forged": is_forged})
+func update_art(placed_status, forged_status):
 	is_placed = placed_status
+	is_forged = forged_status
+	GameData.set_value("Paintings", art_index, {"is_placed": is_placed, "is_forged": is_forged})
+	
 	if(is_placed == false):
 		art.visible = false
-	else:
+	elif(is_placed and is_forged == false):
 		art.visible = true
+		is_locked = true
+	elif(is_placed and is_forged):
+		art.visible = true
+		is_locked = true
+		var forged_art_path = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(art_index)})
+		var image = Image.load_from_file(forged_art_path)
+		art.texture = ImageTexture.create_from_image(image)
+		art.position = canvas_info[frame_index]["pos"]
+		art.scale = canvas_info[frame_index]["size"] / art.texture.get_size()
