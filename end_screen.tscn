@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://youqtolgbscm"]
+
+[ext_resource type="Script" path="res://end_screen.gd" id="1_1ssyf"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ssyf")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="Return" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 383.0
+offset_right = 527.0
+offset_bottom = 414.0
+text = "Return to Main Menu"
+
+[node name="EndingText" type="RichTextLabel" parent="."]
+offset_left = 192.0
+offset_top = 120.0
+offset_right = 797.0
+offset_bottom = 314.0
+text = "Continue"

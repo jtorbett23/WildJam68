@@ -90,6 +90,8 @@ func change_colour(_colour_name):
 		colour = Color.BLACK
 	elif _colour_name == "White":
 		colour = Color.WHITE
+	colours.get_node("Label").text = "Brush Colour: " + _colour_name
+
 
 func change_size(_radius_size):
 	AudioManager.play_sound("brush.mp3")
@@ -99,6 +101,8 @@ func change_size(_radius_size):
 		radius = 10
 	elif _radius_size == "Big":
 		radius = 20
+	sizes.get_node("Label").text = "Brush Size: " + _radius_size
+
 
 func change_reference(direction):
 	print_forgery()
@@ -157,11 +161,15 @@ func _process(delta):
 
 func print_forgery():
 	var forged_painting_id = painting_dict.keys()[painting_index]
+	var forged_painting_info = painting_dict[forged_painting_id]
 	var capture : Image = subviewport.get_texture().get_image()
 	var _time = Time.get_datetime_string_from_system()
 	var filepath = "./painting-{0}-forged.png".format({"0": str(forged_painting_id)})
 	capture.save_png(filepath)
-	GameData.set_value("Paintings", forged_painting_id, {"is_forged": true, "is_placed": false})
+	var peak_snr = compare_with_reference()
+	forged_painting_info["peak_snr"] = peak_snr
+	forged_painting_info["is_forged"] = true
+	GameData.set_value("Paintings", forged_painting_id, forged_painting_info)
 	# subviewport.size = original_size
 
 func compare_with_reference():
@@ -170,8 +178,10 @@ func compare_with_reference():
 	# await RenderingServer.frame_post_draw
 	# 15 seems an ok value for peak_snr with luma / 10 without
 	var drawing : Image = subviewport.get_texture().get_image()
+	var img_metrics = ref_img.compute_image_metrics(drawing, true)
+	return img_metrics["peak_snr"]
 	# background.visible = true
-	compare_images(ref_img, drawing)
+	# compare_images(ref_img, drawing)
 	# ref_img.save_png("./test1.png")
 	# drawing.save_png("./test2.png")
 
@@ -179,9 +189,7 @@ func save_draw_data():
 	GameData.set_dict("Draw", draw_datas)
 	GameData.set_dict("Prev-Draw", previous_draw_datas)
 
-func compare_images(image1, image2):
-	print("Image 1 with 2")
-	print(image1.compute_image_metrics(image2, false))
-	print("Image 1 with 2: with luma")
-	print(image1.compute_image_metrics(image2, true))
+	
+	
+	
 

@@ -3,7 +3,7 @@ extends Node
 var main_menu_ref = preload("res://menu/mainMenu.tscn")
 var travel_ref = preload("res://travel/travel.tscn")
 var draw_ref = preload("res://draw/draw_tool.tscn")
-var end_screen_ref = preload("res://menu/mainMenu.tscn")
+var end_screen_ref = preload("res://end_screen.tscn")
 # var travel
 # var main_menu
 # var draw

@@ -28,7 +28,8 @@ func _input(event):
 			elif("Painting" in interactable.name):
 				if(interactable.is_placed == true and interactable.is_locked == false):
 					enabled = false
-					sure.setup("take this painting", "If you do you must replace it with a forgery", interactable)
+					var info_msg = "This painting is worth £{0}. If you take it you must replace it with a forgery".format({"0": str(interactable.value)})
+					sure.setup("take this painting", info_msg, interactable)
 				elif(interactable.is_placed == false and interactable.is_forged == true):
 					enabled = false
 					sure.setup("place forged painting", "The painting will be locked from further changes", interactable)
@@ -61,6 +62,8 @@ func handle_response(choice, topic, target):
 	if(topic == "exit"):
 		if(choice == "yes"):
 			Camera.transition.fade("End")
+			Camera.target = null
+			travel_scene.queue_free()
 	if(topic == "take this painting"):
 		if(choice == "yes"):
 			target.update_art(false, false)

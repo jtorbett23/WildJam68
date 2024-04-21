@@ -11,14 +11,17 @@ var canvas_info: Dictionary = {
 	
 }
 
+var value 
 var is_placed = true
 var is_forged = false
 var is_locked = false
+var painting_info
 
 @onready var art : Sprite2D = $Art
 @onready var frame : Sprite2D = $Frame
 func _ready():
-	var painting_info = GameData.get_value("Paintings", art_index)
+	painting_info = GameData.get_value("Paintings", art_index)
+	value = painting_info["value"]
 	var frame_path = "res://assets/art/frame-{0}.png".format({"0": str(frame_index)})
 	frame.texture = load(frame_path)
 	#check for the painting
@@ -41,14 +44,14 @@ func _ready():
 func update_art(placed_status, forged_status):
 	is_placed = placed_status
 	is_forged = forged_status
-	GameData.set_value("Paintings", art_index, {"is_placed": is_placed, "is_forged": is_forged})
+	painting_info["is_placed"] = placed_status
+	painting_info["is_forged"] = forged_status
+	GameData.set_value("Paintings", art_index, painting_info)
 	
 	if(is_placed == false):
 		art.visible = false
-	elif(is_placed and is_forged == false):
-		art.visible = true
-		is_locked = true
 	elif(is_placed and is_forged):
+		GameData.money += value
 		art.visible = true
 		is_locked = true
 		var forged_art_path = "./painting-{0}-forged.png".format({"0": str(art_index)})
