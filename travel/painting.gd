@@ -20,9 +20,7 @@ var painting_info
 @onready var art : Sprite2D = $Art
 @onready var frame : Sprite2D = $Frame
 
-@onready var money = $"../../UI/Status/Money"
-
-@onready var sus = $"../../UI/Status/Sus"
+@onready var status = $"../../UI/Status"
 
 func _ready():
 	painting_info = GameData.get_value("Paintings", art_index)
@@ -57,7 +55,12 @@ func update_art(placed_status, forged_status):
 		art.visible = false
 	elif(is_placed and is_forged):
 		GameData.money += value
-		money.text = "Money: £" + str(GameData.money)
+		var peak_snr = painting_info["peak_snr"]
+		var new_sus = 0
+		if(peak_snr < 15):
+			new_sus = floor(15 - peak_snr)
+		GameData.sus += new_sus
+		status.update_text()
 		art.visible = true
 		is_locked = true
 		var forged_art_path = "./painting-{0}-forged.png".format({"0": str(art_index)})

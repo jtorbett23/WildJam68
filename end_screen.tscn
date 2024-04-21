@@ -21,15 +21,23 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="Return" type="Button" parent="."]
-offset_left = 448.0
-offset_top = 383.0
-offset_right = 527.0
-offset_bottom = 414.0
+offset_left = 400.0
+offset_top = 438.0
+offset_right = 573.0
+offset_bottom = 469.0
 text = "Return to Main Menu"
 
 [node name="EndingText" type="RichTextLabel" parent="."]
-offset_left = 192.0
-offset_top = 120.0
-offset_right = 797.0
-offset_bottom = 314.0
+offset_left = 209.0
+offset_top = 111.0
+offset_right = 728.0
+offset_bottom = 305.0
 text = "Continue"
+
+[node name="Label-Outcome" type="Label" parent="."]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 56.0
+offset_right = 467.0
+offset_bottom = 79.0
+text = "Outcome"
