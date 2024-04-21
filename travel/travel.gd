@@ -22,8 +22,6 @@ func _ready():
 func handle_transition_start():
 	player.enabled = false
 
-func free():
-	queue_free()
 
 func handle_transition_middle(target):
 	if(typeof(target) == TYPE_VECTOR2):
