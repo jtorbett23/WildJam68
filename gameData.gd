@@ -40,6 +40,8 @@ var prev_draw_data : Dictionary = {
 
 var money = 0
 
+var sus = 0
+
 func set_value(dict_name, key, value) -> void:
 	if(dict_name == "Settings"):
 		if(key in settings.keys()):

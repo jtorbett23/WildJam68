@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://sx8tdyuorhh0"]
+[gd_scene load_steps=22 format=3 uid="uid://sx8tdyuorhh0"]
 
 [ext_resource type="Script" path="res://travel/travel.gd" id="1_a7l70"]
 [ext_resource type="Texture2D" uid="uid://bowckcu4j42tm" path="res://assets/art/office.png" id="2_j8a5x"]
 [ext_resource type="Script" path="res://travel/player.gd" id="2_ra75s"]
 [ext_resource type="PackedScene" uid="uid://cj77hw11f20yr" path="res://info.tscn" id="3_e1x6c"]
 [ext_resource type="TileSet" uid="uid://tsf6v2ihcrak" path="res://travel/halls.tres" id="3_lt015"]
+[ext_resource type="Script" path="res://travel/status.gd" id="4_0pigk"]
 [ext_resource type="Texture2D" uid="uid://b8tfro11o2uhh" path="res://assets/art/herb-no-flash.png" id="4_iyo3e"]
 [ext_resource type="Texture2D" uid="uid://dr0kgu01vpntd" path="res://assets/art/door.png" id="5_hujf4"]
 [ext_resource type="Texture2D" uid="uid://iyr53df26fet" path="res://assets/art/computer.png" id="6_lcvj4"]
@@ -3200,6 +3201,29 @@ offset_right = 836.0
 offset_bottom = 334.0
 
 [node name="Info" parent="UI" instance=ExtResource("3_e1x6c")]
+
+[node name="Status" type="ColorRect" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 71.0
+grow_horizontal = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+script = ExtResource("4_0pigk")
+
+[node name="Sus" type="Label" parent="UI/Status"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 18.0
+offset_right = 188.0
+offset_bottom = 41.0
+text = "Suspicion Level: 0%"
+
+[node name="Money" type="Label" parent="UI/Status"]
+offset_left = 722.0
+offset_top = 20.0
+offset_right = 872.0
+offset_bottom = 43.0
+text = "Money: £0"
 
 [node name="Rooms" type="Node2D" parent="."]
 
