@@ -37,7 +37,7 @@ func _input(event):
 			elif(interactable.name == "Computer"):
 				Camera.target = null
 				Camera.transition.fade("Draw")
-				travel_scene.free()
+				travel_scene.queue_free()
 
 func handle_response(choice, topic, target):
 	enabled = true
