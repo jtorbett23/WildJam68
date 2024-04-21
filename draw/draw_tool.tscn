@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgeefikyffu0l"]
+[gd_scene load_steps=5 format=3 uid="uid://cgeefikyffu0l"]
 
 [ext_resource type="Script" path="res://draw/draw_tool.gd" id="1_kiyld"]
 [ext_resource type="Script" path="res://draw/draw.gd" id="2_cgdce"]
 [ext_resource type="Texture2D" uid="uid://bv53wcmhac8xl" path="res://assets/art/canvas.png" id="3_x6u8v"]
+[ext_resource type="PackedScene" uid="uid://c6upbp54goduo" path="res://sure.tscn" id="4_qnepq"]
 
 [node name="DrawTool" type="Control"]
 layout_mode = 3
@@ -131,15 +132,6 @@ offset_bottom = 47.0
 text = "Exit
 "
 
-[node name="Print" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 773.0
-offset_top = 19.0
-offset_right = 819.0
-offset_bottom = 50.0
-text = "Print"
-
 [node name="Controls" type="Label" parent="."]
 layout_mode = 0
 offset_left = 2.0
@@ -147,3 +139,11 @@ offset_top = 25.0
 offset_right = 199.0
 offset_bottom = 48.0
 text = "D: Draw, Z: Undo, C: Clear"
+
+[node name="Sure" parent="." instance=ExtResource("4_qnepq")]
+visible = false
+layout_mode = 0
+offset_left = 172.0
+offset_top = 142.0
+offset_right = 772.0
+offset_bottom = 292.0

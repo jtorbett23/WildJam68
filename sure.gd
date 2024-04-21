@@ -1,9 +1,10 @@
 extends ColorRect
 
-@onready var yes_button = $Sizer/Yes
-@onready var no_button = $Sizer/No
-@onready var question = $Sizer/Question
-@onready var info = $Sizer/Info
+@onready var yes_button = $Yes
+@onready var no_button = $No
+@onready var question = $Question
+@onready var info = $Info
+
 
 var topic = null
 var target = null
@@ -15,11 +16,12 @@ func _ready():
 
 
 func setup(action, info_text, new_target):
-	var question_text = "Are you sure you want to {0}".format({"0": action})
+	var question_text = "Are you sure you want to {0}?".format({"0": action})
 	question.text = question_text
 	info.text = info_text
 	topic = action
 	target = new_target
+	self.show()
 
 func handle_response(choice):
 	self.hide()

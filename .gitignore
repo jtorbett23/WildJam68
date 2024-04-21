@@ -3,6 +3,7 @@
 assets/user-art/*
 export
 export.zip
+/painting-*
 
 #Mac
 .DS_Store

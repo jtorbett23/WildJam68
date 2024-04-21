@@ -27,7 +27,7 @@ func _ready():
 	if(painting_info["is_placed"] == true):
 		var art_path
 		if(painting_info["is_forged"] == true):
-			art_path = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(art_index)})
+			art_path = "./painting-{0}-forged.png".format({"0": str(art_index)})
 			var image = Image.load_from_file(art_path)
 			art.texture = ImageTexture.create_from_image(image)
 		else:
@@ -51,7 +51,7 @@ func update_art(placed_status, forged_status):
 	elif(is_placed and is_forged):
 		art.visible = true
 		is_locked = true
-		var forged_art_path = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(art_index)})
+		var forged_art_path = "./painting-{0}-forged.png".format({"0": str(art_index)})
 		var image = Image.load_from_file(forged_art_path)
 		art.texture = ImageTexture.create_from_image(image)
 		art.position = canvas_info[frame_index]["pos"]

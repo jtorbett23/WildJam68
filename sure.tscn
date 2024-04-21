@@ -4,43 +4,63 @@
 
 [node name="Sure" type="ColorRect"]
 offset_top = 15.0
-offset_right = 40.0
-offset_bottom = 55.0
-scale = Vector2(11.9231, 3.72)
+offset_right = 600.0
+offset_bottom = 165.0
 color = Color(0.141176, 0.141176, 0.141176, 1)
 script = ExtResource("1_gihkq")
 
-[node name="Sizer" type="Node2D" parent="."]
-scale = Vector2(0.074797, 0.238634)
-
-[node name="Question" type="Label" parent="Sizer"]
-offset_left = 127.83
-offset_top = 24.7826
-offset_right = 345.83
-offset_bottom = 64.7826
+[node name="Question" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.183333
+anchor_top = 0.02
+anchor_right = 0.513333
+anchor_bottom = 0.02
+offset_right = 246.0
+offset_bottom = 40.0
 text = "Are you sure you want to leave?"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Yes" type="Button" parent="Sizer"]
-offset_left = 115.0
-offset_top = 100.0
-offset_right = 150.0
-offset_bottom = 131.0
+[node name="Yes" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.277331
+anchor_top = 0.547577
+anchor_right = 0.277331
+anchor_bottom = 0.547577
+offset_left = 8.60165
+offset_top = 23.8634
+offset_right = 43.6017
+offset_bottom = 54.8634
 text = "Yes"
 metadata/_edit_use_anchors_ = true
 
-[node name="No" type="Button" parent="Sizer"]
-offset_left = 350.0
-offset_top = 100.0
-offset_right = 381.0
-offset_bottom = 131.0
+[node name="No" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.541368
+anchor_top = 0.540911
+anchor_right = 0.541368
+anchor_bottom = 0.540911
+offset_left = 26.1789
+offset_top = 23.8634
+offset_right = 57.1789
+offset_bottom = 54.8634
 text = "No"
 metadata/_edit_use_anchors_ = true
 
-[node name="Info" type="Label" parent="Sizer"]
-offset_left = 131.194
-offset_top = 64.2095
-offset_right = 377.194
-offset_bottom = 104.209
+[node name="Info" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.166978
+anchor_top = 0.184516
+anchor_right = 0.470312
+anchor_bottom = 0.18452
+offset_left = 9.81292
+offset_top = 15.3226
+offset_right = 255.813
+offset_bottom = 55.3221
 text = "Leaving will end the heist"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true

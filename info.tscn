@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj77hw11f20yr"]
+
+[ext_resource type="Script" path="res://info.gd" id="1_lmuir"]
+
+[node name="Info" type="ColorRect"]
+visible = false
+offset_left = 233.0
+offset_top = 185.0
+offset_right = 833.0
+offset_bottom = 335.0
+color = Color(0.141176, 0.141176, 0.141176, 1)
+script = ExtResource("1_lmuir")
+
+[node name="Ok" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.404702
+anchor_top = 0.454244
+anchor_right = 0.404702
+anchor_bottom = 0.454244
+offset_left = 26.1789
+offset_top = 23.8634
+offset_right = 57.1789
+offset_bottom = 54.8634
+text = "Ok
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Info" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.130312
+anchor_top = -0.00215047
+anchor_right = 0.360312
+anchor_bottom = 0.18452
+offset_left = 9.81292
+offset_top = 15.3226
+offset_right = 255.813
+offset_bottom = 55.3221
+text = "Leaving will end the heist"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true

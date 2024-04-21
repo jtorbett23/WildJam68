@@ -11,9 +11,11 @@ var height_change = 40
 @onready var qmark = $QMark
 
 @onready var sure = $"../UI/Sure"
+@onready var info = $"../UI/Info"
 
 func _ready():
 	sure.connect("response", handle_response)
+	info.connect("response_ok", handle_ok)
 
 func _input(event):
 	if event.is_action_pressed("interact"):
@@ -24,20 +26,35 @@ func _input(event):
 			elif(interactable.name == "Office-Enter"):
 				Camera.transition.fade(Vector2(interactable.target.position.x, position.y + height_change))
 			elif("Painting" in interactable.name):
-				if(interactable.is_placed == true and interactable.is_forged == false and interactable.is_locked == false):
-					sure.show()
-					sure.setup("take this painting", "", interactable)
+				if(interactable.is_placed == true and interactable.is_locked == false):
+					enabled = false
+					sure.setup("take this painting", "If you do you must replace it with a forgery", interactable)
 				elif(interactable.is_placed == false and interactable.is_forged == true):
-					sure.show()
-					sure.setup("place forged painting", "", interactable)
+					enabled = false
+					sure.setup("place forged painting", "The painting will be locked from further changes", interactable)
+				elif(interactable.is_placed == false and interactable.is_forged == false):
+					enabled = false
+					info.setup("You require a forged painting to replace here")
+				elif(interactable.is_placed == true and interactable.is_locked == true):
+					enabled = false
+					info.setup("This painting is locked from further changes")
 			elif("Hall-Exit" in interactable.name):
 				sure.show()
 				sure.setup("exit", "Exiting will end the heist", null)
 				enabled = false
 			elif(interactable.name == "Computer"):
-				Camera.target = null
-				Camera.transition.fade("Draw")
-				travel_scene.queue_free()
+				var paintings_data = GameData.get_dict("Paintings")
+				var has_painting = false
+				for p in paintings_data.values():
+					if(p["is_placed"] == false):
+						has_painting = true
+				if(has_painting):
+					Camera.target = null
+					Camera.transition.fade("Draw")
+					travel_scene.queue_free()
+				else:
+					enabled = false
+					info.setup("You need a painting to be able to create a forgery")
 
 func handle_response(choice, topic, target):
 	enabled = true
@@ -53,6 +70,8 @@ func handle_response(choice, topic, target):
 			target.update_art(true,true)
 			sure.target = null
 
+func handle_ok():
+	enabled = true
 
 	
 				

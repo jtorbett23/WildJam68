@@ -9,6 +9,8 @@ var min_pos : Vector2
 var max_pos : Vector2
 var canvas_size = Vector2(500,500)
 
+var draw_datas : Dictionary = {}
+
 @onready var colours : Node2D = $"../../../Colours"
 @onready var sizes : Node2D = $"../../../Sizes"
 
@@ -18,17 +20,17 @@ var canvas_size = Vector2(500,500)
 @onready var background : Sprite2D = $"Background"
 # @onready var ref_background : Sprite2D =  $"../../../RefBackground"
 @onready var reference : Sprite2D = $"../../../Reference"
-@onready var print_button : Button = $"../../../Print"
 @onready var toggle : Node2D =$"../../../Toggle"
 
 var painting_dict = {}
 var painting_index = 0
 
 func _draw():
-	for data in draw_data:
+	for data in draw_datas[painting_dict.keys()[painting_index]]:
 		draw_circle(data.pos, data.radius, data.colour)
 
 func get_avaliable_paintings():
+	draw_datas = GameData.get_dict("Draw")
 	var paintings = GameData.get_dict("Paintings")
 	var available_paintings = {}
 	for key in paintings.keys():
@@ -40,7 +42,6 @@ func get_avaliable_paintings():
 var is_setup = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_button.connect("pressed", print_forgery)
 	for child in colours.get_children():
 		if(child.get_class() == "Button"):
 			child.connect("pressed", change_colour.bind(child.name))
@@ -52,7 +53,6 @@ func _ready():
 			child.connect("pressed", change_size.bind(child.name))
 	painting_dict = get_avaliable_paintings()
 	if(painting_dict.size() > 0):
-		print_button.visible = true
 		if(painting_dict.size() > 1):
 			toggle.show()
 		var first_painting_id = painting_dict.keys()[painting_index]
@@ -60,7 +60,6 @@ func _ready():
 		reference.texture = load(first_painting_path)
 		var bg_img_size = background.texture.get_image().get_size()
 		var ref_img_size = reference.texture.get_image().get_size()
-		print(ref_img_size, bg_img_size)
 		var scale_x : float = float(ref_img_size.x) / float(bg_img_size.x)
 		var scale_y : float = float(ref_img_size.y) / float(bg_img_size.y)
 		# var scale_x : float = float(canvas_size.x) / float(bg_img_size.x)
@@ -100,12 +99,13 @@ func change_size(_radius_size):
 		radius = 20
 
 func change_reference(direction):
+	print_forgery()
+	await get_tree().process_frame
 	if(direction == "Next"):
 		painting_index += 1
 		toggle.get_node("Prev").visible = true
 		if(painting_index == painting_dict.size() -1):
-			toggle.get_node("Next").visible = false
-			
+			toggle.get_node("Next").visible = false	
 	elif(direction == "Prev"):
 		painting_index -= 1
 		toggle.get_node("Next").visible = true
@@ -115,6 +115,7 @@ func change_reference(direction):
 
 func update_current_reference():
 	var new_painting_id = painting_dict.keys()[painting_index]
+	draw_data = draw_datas[new_painting_id]
 	var new_painting_path = "res://assets/art/painting/painting-{0}-edited.png".format({"0": new_painting_id})
 	reference.texture = load(new_painting_path)
 
@@ -130,21 +131,22 @@ func is_on_canvas(mouse_pos) -> bool:
 func _process(delta):
 	if (is_setup == true):
 		var pos = get_global_mouse_position()
+		var painting_id = painting_dict.keys()[painting_index]
 		if Input.is_action_pressed("draw") and is_on_canvas(pos):
 			var draw_event = {"pos":pos, "radius": radius, "colour": colour}
-			if(draw_data.find(draw_event) == -1):
-				draw_data.append(draw_event)
+			if(draw_datas[painting_id].find(draw_event) == -1):
+				draw_datas[painting_id].append(draw_event)
 				#undo v2
-				previous_draw.append(draw_data.duplicate())
+				previous_draw.append(draw_datas[painting_id].duplicate())
 		elif Input.is_action_just_pressed("clear"):
-			draw_data = []
+			draw_datas[painting_id] = []
 			#undo v2
 			previous_draw.append([])
 		elif Input.is_action_pressed("undo"):
 			#undo v2
 			if(previous_draw.size() > 0):
 				var prev = previous_draw.pop_back()
-				draw_data = prev
+				draw_datas[painting_id] = prev
 			elif(previous_draw.size() == 0):
 				previous_draw = [[]]	
 		queue_redraw()
@@ -154,7 +156,7 @@ func print_forgery():
 	var forged_painting_id = painting_dict.keys()[painting_index]
 	var capture : Image = subviewport.get_texture().get_image()
 	var _time = Time.get_datetime_string_from_system()
-	var filepath = "res://assets/user-art/painting-{0}-forged.png".format({"0": str(forged_painting_id)})
+	var filepath = "./painting-{0}-forged.png".format({"0": str(forged_painting_id)})
 	capture.save_png(filepath)
 	GameData.set_value("Paintings", forged_painting_id, {"is_forged": true, "is_placed": false})
 	# subviewport.size = original_size
@@ -166,13 +168,12 @@ func compare_with_reference():
 	# 15 seems an ok value for peak_snr with luma / 10 without
 	var drawing : Image = subviewport.get_texture().get_image()
 	# background.visible = true
-	# print(ref_img.get_size(), drawing.get_size())
 	compare_images(ref_img, drawing)
 	# ref_img.save_png("./test1.png")
 	# drawing.save_png("./test2.png")
 
-	
-
+func save_draw_data():
+	GameData.set_dict("Draw", draw_datas)
 
 func compare_images(image1, image2):
 	print("Image 1 with 2")
