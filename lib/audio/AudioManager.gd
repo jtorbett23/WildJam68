@@ -1,7 +1,5 @@
 extends Node
 
-class_name Audio
-
 var num_players = 8
 
 var sound_players = [] # Reference of all sound players
